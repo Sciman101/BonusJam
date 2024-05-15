@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=9 format=3 uid="uid://bcvs547m8eq2j"]
 
 [ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="1_bbo8f"]
-[ext_resource type="Script" path="res://Player.gd" id="2_ffstu"]
-[ext_resource type="Script" path="res://HarpoonProjectile.gd" id="3_5jp4s"]
-[ext_resource type="Script" path="res://FloatingTile.gd" id="4_3qvo3"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_ffstu"]
+[ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
+[ext_resource type="Script" path="res://scripts/HarpoonProjectile.gd" id="3_5jp4s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srqxn"]
 size = Vector2(96, 96)
@@ -15,6 +16,16 @@ radius = 21.0238
 radius = 14.0
 
 [node name="Game" type="Node2D"]
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("1_gt6jn")
+
+[node name="SpawnTile" type="Node" parent="Spawner"]
+script = ExtResource("2_ggbvi")
+scene_path = "res://floating_tile.tscn"
+spawn_after_time = 5.0
+spawn_minimum_wait = 2.0
+spawn_maximum_wait = 10.0
 
 [node name="Raft" type="Node2D" parent="."]
 
@@ -123,18 +134,5 @@ shape = SubResource("CircleShape2D_rb23i")
 
 [node name="Rope" type="Line2D" parent="HarpoonProjectile"]
 points = PackedVector2Array(0, 0, 0, 0)
-
-[node name="FloatingTile" type="Area2D" parent="." groups=["Harpoonable", "Tile"]]
-position = Vector2(-366, -155)
-script = ExtResource("4_3qvo3")
-
-[node name="Sprite2D" type="Sprite2D" parent="FloatingTile"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FloatingTile"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
 
 [connection signal="area_entered" from="HarpoonProjectile" to="HarpoonProjectile" method="_on_area_entered"]
