@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=10 format=3 uid="uid://bcvs547m8eq2j"]
 
 [ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="1_bbo8f"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="2_ffstu"]
 [ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
 [ext_resource type="Script" path="res://scripts/HarpoonProjectile.gd" id="3_5jp4s"]
+[ext_resource type="PackedScene" uid="uid://ctokga00is585" path="res://choco_ocean.tscn" id="6_7u45n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srqxn"]
 size = Vector2(96, 96)
@@ -134,5 +135,8 @@ shape = SubResource("CircleShape2D_rb23i")
 
 [node name="Rope" type="Line2D" parent="HarpoonProjectile"]
 points = PackedVector2Array(0, 0, 0, 0)
+
+[node name="Control" parent="." instance=ExtResource("6_7u45n")]
+z_index = -99
 
 [connection signal="area_entered" from="HarpoonProjectile" to="HarpoonProjectile" method="_on_area_entered"]
