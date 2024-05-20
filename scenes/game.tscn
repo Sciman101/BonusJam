@@ -1,19 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=8 format=3 uid="uid://bcvs547m8eq2j"]
 
 [ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="1_bbo8f"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
-[ext_resource type="Script" path="res://scripts/Player.gd" id="2_ffstu"]
 [ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
-[ext_resource type="Script" path="res://scripts/HarpoonProjectile.gd" id="3_5jp4s"]
+[ext_resource type="Script" path="res://scripts/Raft.gd" id="3_hlf7w"]
+[ext_resource type="PackedScene" uid="uid://bxsrdiuhmr1nc" path="res://scenes/player.tscn" id="5_vjhan"]
+[ext_resource type="PackedScene" uid="uid://c7wb6i06lfboe" path="res://scenes/harpoon_projectile.tscn" id="6_hrct3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srqxn"]
 size = Vector2(96, 96)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_t36io"]
-radius = 21.0238
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_rb23i"]
-radius = 14.0
 
 [node name="Game" type="Node2D"]
 
@@ -22,12 +17,13 @@ script = ExtResource("1_gt6jn")
 
 [node name="SpawnTile" type="Node" parent="Spawner"]
 script = ExtResource("2_ggbvi")
-scene_path = "res://floating_tile.tscn"
+scene_path = "res://scenes/floating_tile.tscn"
 spawn_after_time = 5.0
 spawn_minimum_wait = 2.0
 spawn_maximum_wait = 10.0
 
 [node name="Raft" type="Node2D" parent="."]
+script = ExtResource("3_hlf7w")
 
 [node name="RaftTile" type="Area2D" parent="Raft" groups=["Tile"]]
 
@@ -102,37 +98,8 @@ shape = SubResource("RectangleShape2D_srqxn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("harpoon_projectile", "raft")]
-z_index = 10
-script = ExtResource("2_ffstu")
+[node name="Player" parent="." node_paths=PackedStringArray("harpoon_projectile", "raft") instance=ExtResource("5_vjhan")]
 harpoon_projectile = NodePath("../HarpoonProjectile")
 raft = NodePath("../Raft")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(0, -32)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CircleShape2D_t36io")
-
-[node name="HarpoonProjectile" type="Area2D" parent="."]
-z_index = 10
-position = Vector2(-208, -96)
-script = ExtResource("3_5jp4s")
-launch_speed = 400.0
-retract_speed = 300.0
-
-[node name="Sprite2D" type="Sprite2D" parent="HarpoonProjectile"]
-modulate = Color(0, 0, 0, 1)
-rotation = 0.785398
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarpoonProjectile"]
-shape = SubResource("CircleShape2D_rb23i")
-
-[node name="Rope" type="Line2D" parent="HarpoonProjectile"]
-points = PackedVector2Array(0, 0, 0, 0)
-
-[connection signal="area_entered" from="HarpoonProjectile" to="HarpoonProjectile" method="_on_area_entered"]
+[node name="HarpoonProjectile" parent="." instance=ExtResource("6_hrct3")]
