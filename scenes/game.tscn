@@ -1,14 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=7 format=3 uid="uid://bcvs547m8eq2j"]
 
-[ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="1_bbo8f"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
 [ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
 [ext_resource type="Script" path="res://scripts/Raft.gd" id="3_hlf7w"]
+[ext_resource type="PackedScene" uid="uid://lwlnctcxkc8r" path="res://scenes/raft_tile.tscn" id="4_3l65t"]
 [ext_resource type="PackedScene" uid="uid://bxsrdiuhmr1nc" path="res://scenes/player.tscn" id="5_vjhan"]
 [ext_resource type="PackedScene" uid="uid://c7wb6i06lfboe" path="res://scenes/harpoon_projectile.tscn" id="6_hrct3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_srqxn"]
-size = Vector2(96, 96)
 
 [node name="Game" type="Node2D"]
 
@@ -18,87 +15,43 @@ script = ExtResource("1_gt6jn")
 [node name="SpawnTile" type="Node" parent="Spawner"]
 script = ExtResource("2_ggbvi")
 scene_path = "res://scenes/floating_tile.tscn"
-spawn_after_time = 5.0
 spawn_minimum_wait = 2.0
 spawn_maximum_wait = 10.0
 
 [node name="Raft" type="Node2D" parent="."]
+position = Vector2(0, 96)
 script = ExtResource("3_hlf7w")
 
-[node name="RaftTile" type="Area2D" parent="Raft" groups=["Tile"]]
+[node name="RaftTile" parent="Raft" instance=ExtResource("4_3l65t")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
-
-[node name="RaftTile2" type="Area2D" parent="Raft" groups=["Tile"]]
+[node name="RaftTile2" parent="Raft" instance=ExtResource("4_3l65t")]
 position = Vector2(96, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile2"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
+[node name="RaftTile3" parent="Raft" instance=ExtResource("4_3l65t")]
+position = Vector2(-96, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile2"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
-
-[node name="RaftTile5" type="Area2D" parent="Raft" groups=["Tile"]]
-position = Vector2(0, -94)
-
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile5"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile5"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
-
-[node name="RaftTile6" type="Area2D" parent="Raft" groups=["Tile"]]
-position = Vector2(96, -94)
-
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile6"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile6"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
-
-[node name="RaftTile3" type="Area2D" parent="Raft" groups=["Tile"]]
+[node name="RaftTile4" parent="Raft" instance=ExtResource("4_3l65t")]
 position = Vector2(0, 96)
 
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile3"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile3"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
-
-[node name="RaftTile4" type="Area2D" parent="Raft" groups=["Tile"]]
+[node name="RaftTile5" parent="Raft" instance=ExtResource("4_3l65t")]
 position = Vector2(96, 96)
 
-[node name="Sprite2D" type="Sprite2D" parent="Raft/RaftTile4"]
-modulate = Color(0.368627, 0.368627, 0.368627, 1)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_bbo8f")
+[node name="RaftTile6" parent="Raft" instance=ExtResource("4_3l65t")]
+position = Vector2(-96, 96)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Raft/RaftTile4"]
-visible = false
-shape = SubResource("RectangleShape2D_srqxn")
+[node name="RaftTile7" parent="Raft" instance=ExtResource("4_3l65t")]
+position = Vector2(0, -96)
+
+[node name="RaftTile8" parent="Raft" instance=ExtResource("4_3l65t")]
+position = Vector2(96, -96)
+
+[node name="RaftTile9" parent="Raft" instance=ExtResource("4_3l65t")]
+position = Vector2(-96, -96)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." node_paths=PackedStringArray("harpoon_projectile", "raft") instance=ExtResource("5_vjhan")]
+position = Vector2(0, 96)
 harpoon_projectile = NodePath("../HarpoonProjectile")
 raft = NodePath("../Raft")
 
