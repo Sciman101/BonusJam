@@ -5,8 +5,12 @@ extends Area2D
 
 @export var move_speed : float = 200 # How fast do we move on the raft?
 @export var water_move_speed : float = 75 # How fast do we move in water?
+@export var paddle_speed : float = 50 # How fast does the raft move when we paddle?
 
-var is_in_water : bool = false # Are we in water?
+@onready var paddle_sensor_left = $LeftPaddleSensor
+@onready var paddle_sensor_right = $RightPaddleSensor
+
+var is_in_water : bool = true # Are we in water?
 
 func _ready():
 	# Tell the projectile who owns it
@@ -27,9 +31,17 @@ func _process(delta):
 		if harpoon_projectile.can_be_launched():
 			var direction = (get_global_mouse_position() - global_position).normalized()
 			harpoon_projectile.launch(direction)
-		
+	
+	# Paddle
+	if Input.is_action_just_pressed("paddle"):
+		if not is_in_water:
+			if paddle_sensor_left.over_water:
+				raft.paddle(paddle_speed)
+			elif paddle_sensor_right.over_water:
+				raft.paddle(-paddle_speed)
 
 func check_is_in_water():
+	var was_in_water = is_in_water
 	# Assume we're in water
 	is_in_water = true
 	var overlapping = get_overlapping_areas()
@@ -41,3 +53,7 @@ func check_is_in_water():
 			is_in_water = false
 			# Stop checking
 			break
+	if was_in_water and not is_in_water:
+		raft.add_passenger(self)
+	elif not was_in_water and is_in_water:
+		raft.remove_passenger(self)

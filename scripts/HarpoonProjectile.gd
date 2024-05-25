@@ -59,17 +59,31 @@ func _process(delta):
 		# Move our object to the location of the harpoon
 		# (We could use parenting here, but it's kind of a pain with godot imo and this works just as well)
 		if harpooned_object:
+			var old_pos = harpooned_object.position
 			harpooned_object.position = position + attachment_offset
 			var overlaps = harpooned_object.get_overlapping_areas()
 			for obj in overlaps:
 				# Stick it to the raft
 				if obj.is_in_group("Tile"):
-					harpooned_object.get_parent().remove_child.call_deferred(harpooned_object)
-					player.raft.add_child.call_deferred(harpooned_object)
-					# It's on the raft now, we can't re-harpoon it
-					harpooned_object.remove_from_group("Harpoonable")
-					set_mode(DISABLED)
-					break
+					var raft = player.raft
+					var raft_tile_position = raft.world_pos_to_tile(old_pos)
+					if not raft.get_tile(raft_tile_position):
+						if not raft.has_neighbors(raft_tile_position):
+							for corner in [Vector2i(1,1),Vector2i(-1,1),Vector2i(1,-1),Vector2i(-1,-1)]:
+								if raft.get_tile(raft_tile_position + corner):
+									var hor = Vector2i(corner.x,0)
+									var ver = Vector2i(0,corner.y)
+									if not raft.get_tile(raft_tile_position + hor):
+										raft_tile_position += hor
+										break 
+									elif not raft.get_tile(raft_tile_position + ver):
+										raft_tile_position += ver
+										break
+						raft.set_tile(raft_tile_position, harpooned_object, false, true)
+						# It's on the raft now, we can't re-harpoon it
+						harpooned_object.remove_from_group("Harpoonable")
+						set_mode(DISABLED)
+						break
 		
 	elif mode == LAUNCHED:
 		position += velocity * delta

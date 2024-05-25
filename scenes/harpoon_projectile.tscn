@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7wb6i06lfboe"]
+
+[ext_resource type="Script" path="res://scripts/HarpoonProjectile.gd" id="1_tli4m"]
+[ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="2_c46x6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rb23i"]
+radius = 14.0
+
+[node name="HarpoonProjectile" type="Area2D"]
+z_index = 10
+position = Vector2(-208, -96)
+script = ExtResource("1_tli4m")
+launch_speed = 400.0
+retract_speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+rotation = 0.785398
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_c46x6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rb23i")
+
+[node name="Rope" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
