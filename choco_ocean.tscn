@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctokga00is585"]
+
+[ext_resource type="Shader" path="res://ocean.gdshader" id="1_ysq44"]
+[ext_resource type="Texture2D" uid="uid://b23l30ofn3w7s" path="res://images/chocoOceanTile.png" id="2_f18ia"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i7pq1"]
+shader = ExtResource("1_ysq44")
+shader_parameter/tile_factor = 10.0
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/time_factor = Vector2(10, 2)
+shader_parameter/offset_factor = Vector2(7, 0.35)
+shader_parameter/amplitude = Vector2(0.05, 0.17)
+shader_parameter/scroll_vector = Vector2(0, -0.5)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ChocoOcean" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_i7pq1")
+scale = Vector2(9.01953, 5.10156)
+texture = ExtResource("2_f18ia")
