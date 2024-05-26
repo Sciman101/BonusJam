@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c26uye56t8mrw"]
+[gd_scene load_steps=7 format=3 uid="uid://daboil10diild"]
 
-[ext_resource type="Script" path="res://scripts/FloatingTile.gd" id="1_1pfps"]
-[ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="2_qcik1"]
+[ext_resource type="Script" path="res://scripts/FloatingTile.gd" id="1_41t70"]
+[ext_resource type="Texture2D" uid="uid://dpxhpgjq4ep6e" path="res://images/chocoTile.png" id="2_57rs7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srqxn"]
 size = Vector2(96, 96)
@@ -68,13 +68,14 @@ _data = {
 "SinkAnim": SubResource("Animation_1kwat")
 }
 
-[node name="FloatingTile" type="Area2D" groups=["Harpoonable", "Tile"]]
+[node name="ChocolateTile" type="Area2D" groups=["Harpoonable", "Tile"]]
 z_index = -10
-script = ExtResource("1_1pfps")
+script = ExtResource("1_41t70")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -10
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_qcik1")
+texture = ExtResource("2_57rs7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=8 format=3 uid="uid://bcvs547m8eq2j"]
 
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
 [ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lwlnctcxkc8r" path="res://scenes/raft_tile.tscn" id="4_3l65t"]
 [ext_resource type="PackedScene" uid="uid://bxsrdiuhmr1nc" path="res://scenes/player.tscn" id="5_vjhan"]
 [ext_resource type="PackedScene" uid="uid://c7wb6i06lfboe" path="res://scenes/harpoon_projectile.tscn" id="6_hrct3"]
+[ext_resource type="PackedScene" uid="uid://ctokga00is585" path="res://scenes/choco_ocean.tscn" id="7_k0a4r"]
 
 [node name="Game" type="Node2D"]
 
@@ -18,7 +19,19 @@ scene_path = "res://scenes/floating_tile.tscn"
 spawn_minimum_wait = 2.0
 spawn_maximum_wait = 10.0
 
-[node name="Raft" type="Node2D" parent="."]
+[node name="SpawnTile Graham" type="Node" parent="Spawner"]
+script = ExtResource("2_ggbvi")
+scene_path = "res://scenes/graham_tile.tscn"
+spawn_minimum_wait = 2.0
+spawn_maximum_wait = 10.0
+
+[node name="SpawnTile Chocolate" type="Node" parent="Spawner"]
+script = ExtResource("2_ggbvi")
+scene_path = "res://scenes/chocolate_tile.tscn"
+spawn_minimum_wait = 2.0
+spawn_maximum_wait = 10.0
+
+[node name="Raft" type="Node2D" parent="." groups=["Raft"]]
 position = Vector2(0, 96)
 script = ExtResource("3_hlf7w")
 
@@ -56,3 +69,8 @@ harpoon_projectile = NodePath("../HarpoonProjectile")
 raft = NodePath("../Raft")
 
 [node name="HarpoonProjectile" parent="." instance=ExtResource("6_hrct3")]
+
+[node name="Control" parent="." instance=ExtResource("7_k0a4r")]
+z_index = -99
+size_flags_horizontal = 3
+size_flags_vertical = 3

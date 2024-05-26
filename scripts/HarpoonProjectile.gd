@@ -26,6 +26,10 @@ func set_mode(mode:int):
 	if mode == DISABLED:
 		hide()
 		velocity = Vector2.ZERO
+		# If a tile is dragged back but not attached, it needs to be set as
+		# not harpooned so it can be run over
+		if harpooned_object && harpooned_object.is_in_group("Harpoonable"):
+			harpooned_object.remove_from_group("Harpooned")
 		harpooned_object = null
 		set_process(false)
 	else:
@@ -64,7 +68,8 @@ func _process(delta):
 			var overlaps = harpooned_object.get_overlapping_areas()
 			for obj in overlaps:
 				# Stick it to the raft
-				if obj.is_in_group("Tile"):
+				# Also check if not harpoonable to avoid sticking tiles to other free-floating tiles
+				if obj.is_in_group("Tile") && !obj.is_in_group("Harpoonable"):
 					var raft = player.raft
 					var raft_tile_position = raft.world_pos_to_tile(old_pos)
 					if not raft.get_tile(raft_tile_position):
@@ -101,3 +106,5 @@ func _on_area_entered(area):
 		harpooned_object = area
 		attachment_offset = harpooned_object.position - position
 		set_mode(RETRACTING)
+		# Add to harpooned group so that it doesn't get 'run over' when touching the raft
+		area.add_to_group("Harpooned")
