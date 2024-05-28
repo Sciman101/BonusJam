@@ -19,6 +19,18 @@ scene_path = "res://scenes/floating_tile.tscn"
 spawn_minimum_wait = 2.0
 spawn_maximum_wait = 10.0
 
+[node name="SpawnTileOar" type="Node" parent="Spawner"]
+script = ExtResource("2_ggbvi")
+scene_path = "res://scenes/oar_station.tscn"
+spawn_minimum_wait = 2.0
+spawn_maximum_wait = 10.0
+
+[node name="SpawnTileHarpoon" type="Node" parent="Spawner"]
+script = ExtResource("2_ggbvi")
+scene_path = "res://scenes/harpoon_station.tscn"
+spawn_minimum_wait = 2.0
+spawn_maximum_wait = 10.0
+
 [node name="SpawnTile Graham" type="Node" parent="Spawner"]
 script = ExtResource("2_ggbvi")
 scene_path = "res://scenes/graham_tile.tscn"

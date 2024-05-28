@@ -1,6 +1,6 @@
 extends Area2D
 
-const HARPOON_ROPE_LENGTH : float = 500 # The max distance the harpoon can be from the player
+var HARPOON_ROPE_LENGTH : float = 500 # The max distance the harpoon can be from the player
 
 enum {
 	DISABLED, # The harpoon has not been fired
