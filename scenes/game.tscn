@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcvs547m8eq2j"]
+[gd_scene load_steps=10 format=3 uid="uid://bcvs547m8eq2j"]
 
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_gt6jn"]
 [ext_resource type="Script" path="res://scripts/SpawnRule.gd" id="2_ggbvi"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://lwlnctcxkc8r" path="res://scenes/raft_tile.tscn" id="4_3l65t"]
 [ext_resource type="PackedScene" uid="uid://bxsrdiuhmr1nc" path="res://scenes/player.tscn" id="5_vjhan"]
 [ext_resource type="PackedScene" uid="uid://c7wb6i06lfboe" path="res://scenes/harpoon_projectile.tscn" id="6_hrct3"]
-[ext_resource type="PackedScene" uid="uid://ctokga00is585" path="res://scenes/choco_ocean.tscn" id="7_k0a4r"]
+[ext_resource type="PackedScene" path="res://scenes/choco_ocean.tscn" id="7_k0a4r"]
+[ext_resource type="PackedScene" uid="uid://ouuqlmfgkdrx" path="res://scenes/Orca Test.tscn" id="8_32g1f"]
+[ext_resource type="PackedScene" uid="uid://cf0ik5lvvmchg" path="res://scenes/Glacier.tscn" id="9_npq1p"]
 
 [node name="Game" type="Node2D"]
 
@@ -74,3 +76,15 @@ raft = NodePath("../Raft")
 z_index = -99
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Area2D" parent="." instance=ExtResource("8_32g1f")]
+position = Vector2(-732, 109)
+
+[node name="Area2D2" parent="." instance=ExtResource("9_npq1p")]
+position = Vector2(-266, -445)
+scale = Vector2(1.28, 1.28)
+
+[node name="Area2D3" parent="." instance=ExtResource("9_npq1p")]
+position = Vector2(393, -712)
+rotation = 0.23911
+scale = Vector2(1.905, 1.905)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bxsrdiuhmr1nc"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_2n7rx"]
-[ext_resource type="Texture2D" uid="uid://c6uve4cmsn6vd" path="res://icon.svg" id="2_jsbjb"]
+[ext_resource type="Texture2D" uid="uid://ckp022fxgsf8y" path="res://images/CerealFront.png" id="2_qmabu"]
 [ext_resource type="Script" path="res://scripts/PaddleSensor.gd" id="3_tapbm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t36io"]
@@ -13,10 +13,9 @@ radius = 21.0238
 z_index = 10
 script = ExtResource("1_2n7rx")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -32)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jsbjb")
+[node name="Cereal" type="Sprite2D" parent="."]
+scale = Vector2(1.3125, 1.3125)
+texture = ExtResource("2_qmabu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_t36io")

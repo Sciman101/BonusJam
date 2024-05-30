@@ -10,6 +10,11 @@ extends Area2D
 @onready var paddle_sensor_left = $LeftPaddleSensor
 @onready var paddle_sensor_right = $RightPaddleSensor
 
+var FrontSprite = load("res://images/CerealFront.png")
+var BackSprite = load("res://images/CerealBack.png")
+var LeftSprite = load("res://images/CerealLeft.png")
+var RightSprite = load("res://images/CerealRight.png")
+
 var is_in_water : bool = true # Are we in water?
 
 func _ready():
@@ -26,6 +31,15 @@ func _process(delta):
 	# Adjust position
 	position += movement * _speed * delta
 	
+	if Input.is_action_just_pressed("down"):
+		$Cereal.texture = FrontSprite
+	if Input.is_action_just_pressed("left"):
+		$Cereal.texture = LeftSprite
+	if Input.is_action_just_pressed("right"):
+		$Cereal.texture = RightSprite
+	if Input.is_action_just_pressed("up"):
+		$Cereal.texture = BackSprite
+		
 	# Shoot
 	if Input.is_action_just_pressed("harpoon"):
 		if harpoon_projectile.can_be_launched():
